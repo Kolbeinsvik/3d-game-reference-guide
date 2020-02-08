@@ -3,4 +3,4 @@ authors = ["Debug Lines"]
 language = "en"
 multilingual = false
 src = "src"
-title = "3D game reference guide"
+title = "3D game reference guide with Rust and Amethyst"
