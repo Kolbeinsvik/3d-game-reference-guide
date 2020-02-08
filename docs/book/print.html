@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="spacer"></li><li class="expanded "><a href="overview/index.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="infrastructure/index.html"><strong aria-hidden="true">2.</strong> Infrastructure</a></li><li><ol class="section"><li class="expanded "><a href="infrastructure/programming-languages.html"><strong aria-hidden="true">2.1.</strong> Programming languages</a></li><li class="expanded "><a href="infrastructure/game-engines.html"><strong aria-hidden="true">2.2.</strong> Game Engines</a></li><li class="expanded "><a href="infrastructure/entity-component-system.html"><strong aria-hidden="true">2.3.</strong> Entity-Component-System (ECS)</a></li><li class="expanded "><a href="infrastructure/graphics-api.html"><strong aria-hidden="true">2.4.</strong> Graphics API</a></li></ol></li><li class="expanded "><a href="window-management/index.html"><strong aria-hidden="true">3.</strong> Window management</a></li><li><ol class="section"><li class="expanded "><a href="window-management/examples.html"><strong aria-hidden="true">3.1.</strong> Examples</a></li></ol></li><li class="expanded "><a href="user-interface/index.html"><strong aria-hidden="true">4.</strong> User interface (UI)</a></li><li class="expanded "><a href="physics/index.html"><strong aria-hidden="true">5.</strong> Physics</a></li><li class="spacer"></li><li class="expanded "><a href="examples/index.html"><strong aria-hidden="true">6.</strong> Practical examples</a></li><li><ol class="section"><li class="expanded "><a href="examples/infrastructure.html"><strong aria-hidden="true">6.1.</strong> Infrastructure</a></li><li class="expanded "><a href="examples/core-setup.html"><strong aria-hidden="true">6.2.</strong> Core setup</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="resources/index.html"><strong aria-hidden="true">7.</strong> Other Resources</a></li><li><ol class="section"><li class="expanded "><a href="resources/3d-games-resources.html"><strong aria-hidden="true">7.1.</strong> 3D games</a></li><li class="expanded "><a href="resources/2d-games-resources.html"><strong aria-hidden="true">7.2.</strong> 2D games</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="spacer"></li><li class="expanded "><a href="overview/index.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="infrastructure/index.html"><strong aria-hidden="true">2.</strong> Infrastructure</a></li><li><ol class="section"><li class="expanded "><a href="infrastructure/programming-languages.html"><strong aria-hidden="true">2.1.</strong> Programming languages</a></li><li class="expanded "><a href="infrastructure/game-engines.html"><strong aria-hidden="true">2.2.</strong> Game Engines</a></li><li class="expanded "><a href="infrastructure/entity-component-system.html"><strong aria-hidden="true">2.3.</strong> Entity-Component-System (ECS)</a></li><li class="expanded "><a href="infrastructure/graphics-api.html"><strong aria-hidden="true">2.4.</strong> Graphics API</a></li></ol></li><li class="expanded "><a href="window-management/index.html"><strong aria-hidden="true">3.</strong> Window management</a></li><li><ol class="section"><li class="expanded "><a href="window-management/examples.html"><strong aria-hidden="true">3.1.</strong> Examples</a></li></ol></li><li class="expanded "><a href="user-interface/index.html"><strong aria-hidden="true">4.</strong> User interface (UI)</a></li><li class="expanded "><a href="physics/index.html"><strong aria-hidden="true">5.</strong> Physics</a></li><li class="spacer"></li><li class="expanded "><a href="examples/index.html"><strong aria-hidden="true">6.</strong> Practical examples</a></li><li><ol class="section"><li class="expanded "><a href="examples/core-setup.html"><strong aria-hidden="true">6.1.</strong> Core setup</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="resources/index.html"><strong aria-hidden="true">7.</strong> Other Resources</a></li><li><ol class="section"><li class="expanded "><a href="resources/3d-games-resources.html"><strong aria-hidden="true">7.1.</strong> 3D games</a></li><li class="expanded "><a href="resources/2d-games-resources.html"><strong aria-hidden="true">7.2.</strong> 2D games</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -359,19 +359,21 @@ A game will need to handle a set of things, loosely as follows:</p>
 <h1><a class="header" href="#physics" id="physics">Physics</a></h1>
 <h1><a class="header" href="#examples-1" id="examples-1">Examples</a></h1>
 <p>The main focus is on programming as much as possible, as opposed to using a provided game editor, such as Unity.
-Rust and Amethyst will be used for the examples.</p>
+Rust and Amethyst will be used for the examples.
+Rust is a programming language.
+Amethyst is a &quot;game engine engine&quot;.
+It provides many of the parts required to make a 3D game.
+It uses an Entity-Component-System architecture.</p>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/">Rust</a></li>
 <li><a href="https://book.amethyst.rs/stable/">Amethyst</a></li>
 </ul>
 <p>There are other game engines made directly in Rust,
 or that have Rust bindings.</p>
-<h1><a class="header" href="#infrastructure" id="infrastructure">Infrastructure</a></h1>
-<p>This reference guide uses Rust and Amethyst for code examples. This section has some general info about the frameworks.</p>
-<p>Rust is a programming language.</p>
-<p>Amethyst is a &quot;game engine engine&quot;.
-It provides many of the parts required to make a 3D game.
-It uses an Entity-Component-System architecture.</p>
+<h2><a class="header" href="#table-of-content" id="table-of-content">Table of content</a></h2>
+<ul>
+<li><a href="examples/core-setup.html">Core setup</a> example</li>
+</ul>
 <h1><a class="header" href="#core-setup-example" id="core-setup-example">Core setup example</a></h1>
 <p>This will set up the minimal things required to run a 3d game with Amethyst and Rust.</p>
 <ul>

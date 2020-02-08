@@ -18,7 +18,6 @@
 ---
 
 - [Practical examples](./examples/index.md)
-  - [Infrastructure](./examples/infrastructure.md)
   - [Core setup](./examples/core-setup.md)
 
 ---
