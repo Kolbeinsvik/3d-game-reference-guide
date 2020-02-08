@@ -1,0 +1,6 @@
+[book]
+authors = ["Debug Lines"]
+language = "en"
+multilingual = false
+src = "src"
+title = "3D game reference guide"

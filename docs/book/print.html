@@ -1,0 +1,638 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>3D game reference guide</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded affix "><a href="introduction.html">Introduction</a></li><li class="spacer"></li><li class="expanded "><a href="overview/index.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="infrastructure/index.html"><strong aria-hidden="true">2.</strong> Infrastructure</a></li><li><ol class="section"><li class="expanded "><a href="infrastructure/programming-languages.html"><strong aria-hidden="true">2.1.</strong> Programming languages</a></li><li class="expanded "><a href="infrastructure/game-engines.html"><strong aria-hidden="true">2.2.</strong> Game Engines</a></li><li class="expanded "><a href="infrastructure/entity-component-system.html"><strong aria-hidden="true">2.3.</strong> Entity-Component-System (ECS)</a></li><li class="expanded "><a href="infrastructure/graphics-api.html"><strong aria-hidden="true">2.4.</strong> Graphics API</a></li></ol></li><li class="expanded "><a href="window-management/index.html"><strong aria-hidden="true">3.</strong> Window management</a></li><li><ol class="section"><li class="expanded "><a href="window-management/examples.html"><strong aria-hidden="true">3.1.</strong> Examples</a></li></ol></li><li class="expanded "><a href="user-interface/index.html"><strong aria-hidden="true">4.</strong> User interface (UI)</a></li><li class="expanded "><a href="physics/index.html"><strong aria-hidden="true">5.</strong> Physics</a></li><li class="spacer"></li><li class="expanded "><a href="examples/index.html"><strong aria-hidden="true">6.</strong> Practical examples</a></li><li><ol class="section"><li class="expanded "><a href="examples/infrastructure.html"><strong aria-hidden="true">6.1.</strong> Infrastructure</a></li><li class="expanded "><a href="examples/core-setup.html"><strong aria-hidden="true">6.2.</strong> Core setup</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="resources/index.html"><strong aria-hidden="true">7.</strong> Other Resources</a></li><li><ol class="section"><li class="expanded "><a href="resources/3d-games-resources.html"><strong aria-hidden="true">7.1.</strong> 3D games</a></li><li class="expanded "><a href="resources/2d-games-resources.html"><strong aria-hidden="true">7.2.</strong> 2D games</a></li><li class="spacer"></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">3D game reference guide</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<p>This book aims to document all of the required parts of making a modern 3D game.</p>
+<p>The first part is about the concepts and a
+<a href="./examples/">later chapter has different examples</a>.</p>
+<h2><a class="header" href="#other-mentions" id="other-mentions">Other mentions</a></h2>
+<p>You can find more examples in the dedicated <a href="./resources">resources section</a>. The following is only a shortlist.</p>
+<p><a href="https://arewegameyet.com/">Are we a game yet?</a> can be checked for the status and examples of game related project for Rust.</p>
+<p>Also check out the excellent <a href="https://bfnightly.bracketproductions.com/rustbook/">Roguelike tutoral in Rust</a>.
+It is for 2D games but has a very nice introduction on how to use <code>Specs</code>, the entity-component-library used in Amethyst.</p>
+<h1><a class="header" href="#overview" id="overview">Overview</a></h1>
+<p>There are many things that are required to make a modern 3D game.
+Loosely, they are as follows:</p>
+<ul>
+<li>window management</li>
+<li>graphics pipeline</li>
+<li>physics engine</li>
+<li>assets</li>
+<li>user interface (UI)</li>
+</ul>
+<h1><a class="header" href="#infrastructure-for-modern-3d-games" id="infrastructure-for-modern-3d-games">Infrastructure for modern 3D games</a></h1>
+<h1><a class="header" href="#programming-languages" id="programming-languages">Programming languages</a></h1>
+<h2><a class="header" href="#rust" id="rust">Rust</a></h2>
+<p>Rust is a performant programming language focused on compile-time memory safety.</p>
+<p>From the <a href="https://www.rust-lang.org/">Rust website</a>.</p>
+<p><strong>Performance</strong>:
+Rust is blazingly fast and memory-efficient: with no runtime or garbage collector, it can power performance-critical services, run on embedded devices, and easily integrate with other languages.</p>
+<p><strong>Reliability</strong>:
+Rust’s rich type system and ownership model guarantee memory-safety and thread-safety — enable you to eliminate many classes of bugs at compile-time.</p>
+<p><strong>Productivity</strong>:
+Rust has great documentation, a friendly compiler with useful error messages, and top-notch tooling — an integrated package manager and build tool, smart multi-editor support with auto-completion and type inspections, an auto-formatter, and more.</p>
+<p>Also check out:</p>
+<ul>
+<li>The <a href="https://doc.rust-lang.org/book/">Rust documentation book</a></li>
+<li>The <a href="https://users.rust-lang.org/">Forums</a></li>
+<li>Rust game dev resources: <a href="https://arewegameyet.com/">&quot;Are we game yet?&quot;</a></li>
+</ul>
+<h1><a class="header" href="#game-engines" id="game-engines">Game engines</a></h1>
+<ul>
+<li>Amethyst</li>
+<li>GameMaker</li>
+<li>Godot</li>
+<li>Source</li>
+<li>Unity</li>
+<li>Unreal</li>
+</ul>
+<h2><a class="header" href="#amethyst" id="amethyst">Amethyst</a></h2>
+<p>Amethyst is a &quot;Game engine engine&quot;, a collection of separate libraries and tools that collectively make up a game engine.</p>
+<ul>
+<li><a href="https://amethyst.rs/">Website</a></li>
+<li><a href="https://book.amethyst.rs/stable/intro.html">Documentation</a></li>
+<li><a href="https://github.com/amethyst/amethyst">Code repository</a></li>
+<li><a href="https://github.com/amethyst/amethyst/tree/master/examples">Code examples</a></li>
+</ul>
+<p>Amethyst is written in Rust and is pulled in as a dependency when your game project.</p>
+<h2><a class="header" href="#godot" id="godot">Godot</a></h2>
+<p>Has Rust bindings.</p>
+<h1><a class="header" href="#entity-component-system-ecs" id="entity-component-system-ecs">Entity-Component-System (ECS)</a></h1>
+<p>ECS is a pattern for splitting data and behavior based on different use cases.
+Alternative patterns include object-oriented and actor model.</p>
+<p><strong>World</strong>:
+The world is a wrapper that ties the entities, components, and systems together.</p>
+<p><strong>Entity</strong>:
+In its simplest form entities are just <code>id</code>s.</p>
+<p><strong>Component</strong>:
+Components are pure data structures that contain no logic or behavior.
+They always refer to entities.</p>
+<p><strong>Systems</strong>:
+Systems loop over sets of components, and can read and write to them.</p>
+<p><strong>Resources</strong>:
+Global data structures.</p>
+<h2><a class="header" href="#simplified-example" id="simplified-example">Simplified example</a></h2>
+<p><strong>Resources</strong></p>
+<ul>
+<li>Map</li>
+<li>Inputs</li>
+</ul>
+<p><strong>Components</strong></p>
+<ul>
+<li>Position(x, y, z)</li>
+<li>PlayerMovement</li>
+<li>NpcMovement</li>
+<li>RandomLaughing(cooldownTime)</li>
+</ul>
+<p>Components that does not contain any data on their own are often
+called &quot;tag components&quot; and is used to limit the scope when looping over components.
+<code>PlayerMovement</code> and <code>NpcMovement</code> are both tag components in this simplified example.</p>
+<p><strong>Entities with components</strong></p>
+<p>Player</p>
+<ul>
+<li>Position</li>
+<li>PlayerMovement</li>
+</ul>
+<p>Everyday regular rock</p>
+<ul>
+<li>Position</li>
+<li>RandomLaughing</li>
+</ul>
+<p>Normal NPC</p>
+<ul>
+<li>Position</li>
+<li>NpcMovement</li>
+</ul>
+<p>Other NPC</p>
+<ul>
+<li>Position</li>
+<li>NpcMovement</li>
+<li>RandomLaughing</li>
+</ul>
+<p><strong>Systems</strong></p>
+<p>Some systems are very generic and some are very spesific.
+Here are some simplified ones for the entities and components we have defined.</p>
+<p>PlayerMovementSystem</p>
+<ol>
+<li>Read inputs (for example <code>WASD</code>)</li>
+<li>Loop over the components: <code>Position</code> and <code>PlayerMovement</code></li>
+<li>Update the <code>Position</code> data based on the user inputs</li>
+</ol>
+<p>NpcMovementSystem</p>
+<ol>
+<li>Loop over the components: <code>Position</code> and <code>NpcMovement</code></li>
+<li>Get a random action (for example move forward or turn)</li>
+<li>Update the <code>Position</code> data based on that action</li>
+</ol>
+<p>LaughSystem</p>
+<ol>
+<li>Loop over the components: <code>RandomLaughing</code> and <code>Position</code></li>
+<li>Check the <code>Map</code> resource
+<ul>
+<li>If the position does not match an odd numbered map tile,
+skip to the next element</li>
+<li>Otherwise, continue with the next step</li>
+</ul>
+</li>
+<li>Check the cooldown time on the component
+<ul>
+<li>If zero, play laugh sound track and reset timer</li>
+<li>If not zero, decrease the timer by a tick</li>
+</ul>
+</li>
+</ol>
+<p><strong>Summary</strong></p>
+<p>In this simplified example every system is interested in entities
+with the <code>Position</code> component.
+However, the reason they want to know the position differ.
+The <code>PlayerMovementSystem</code> and <code>NpcMovementSystem</code> both updates the component
+but has different ways to update it.
+The <code>LaughSystem</code> on the other hand only reads the the <code>Position</code> data.
+It only want the information to know if the entity should play a laugh sound.</p>
+<p>The ECS approach makes it very easy to extend a game with new features
+as new components and systems can be added or changed without having to change the existing ones.
+It can also improve readability and maintenance as systems can easily be
+scoped to do &quot;one thing&quot; (separation of concern).</p>
+<h1><a class="header" href="#graphics-api" id="graphics-api">Graphics API</a></h1>
+<p>The graphics API is a way for programs to utilize the GPU on a computer.
+Modern 3D games require a rendering pipeline that uses the GPU for performance.</p>
+<p>There are several graphics APIs available for different plattforms.
+They are in short: Vulkan, OpenGl, Metal, DrectX.</p>
+<h2><a class="header" href="#vulkan" id="vulkan">Vulkan</a></h2>
+<ul>
+<li>OS: Cross platform</li>
+</ul>
+<p>Vulkan is a new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.</p>
+<h2><a class="header" href="#opengl" id="opengl">OpenGL</a></h2>
+<ul>
+<li>OS: Cross platform</li>
+</ul>
+<p>OpenGL is the premier environment for developing portable, interactive 2D and 3D graphics applications. Since its introduction in 1992, OpenGL has become the industry's most widely used and supported 2D and 3D graphics application programming interface (API), bringing thousands of applications to a wide variety of computer platforms. OpenGL fosters innovation and speeds application development by incorporating a broad set of rendering, texture mapping, special effects, and other powerful visualization functions. Developers can leverage the power of OpenGL across all popular desktop and workstation platforms, ensuring wide application deployment.</p>
+<h2><a class="header" href="#metal" id="metal">Metal</a></h2>
+<ul>
+<li>OS: Apple macOS, iOS, tvOS</li>
+</ul>
+<p>Metal provides near-direct access to the graphics processing unit (GPU), enabling you to maximize the graphics and compute potential of your apps on iOS, macOS, and tvOS. Building on an approachable, low-overhead architecture with precompiled GPU shaders, fine-grained resource control, and multithreading support, Metal further evolves support for GPU-driven command creation, simplifies working with the array of Metal-capable GPUs, and lets you tap into Pro power of Mac Pro and Pro Display XDR.</p>
+<h2><a class="header" href="#directx" id="directx">DirectX</a></h2>
+<ul>
+<li>OS: Windows</li>
+</ul>
+<p>Microsoft DirectX is a group of technologies designed to make Windows-based computers an ideal platform for running and displaying applications rich in multimedia elements such as full-color graphics, video, 3D animation, and rich audio. DirectX includes security and performance updates, along with many new features across all technologies, which can be accessed by applications using the DirectX APIs.</p>
+<h1><a class="header" href="#window-management" id="window-management">Window management</a></h1>
+<p>Modern 3D games are required to run in a window.
+A game will need to handle a set of things, loosely as follows:</p>
+<ul>
+<li>Different modes
+<ul>
+<li>Fullscreen mode,</li>
+<li>Windowed mode</li>
+<li>Borderless windowed mode</li>
+</ul>
+</li>
+<li>Window events
+<ul>
+<li>Close event</li>
+<li>Window resize</li>
+</ul>
+</li>
+<li>Mouse events
+<ul>
+<li>Mouse movements</li>
+<li>Mouse click, hold, drag</li>
+</ul>
+</li>
+</ul>
+<h1><a class="header" href="#examples" id="examples">Examples</a></h1>
+<p>Amethyst uses <a href="https://github.com/rust-windowing/winit">winit</a> for window management.</p>
+<h1><a class="header" href="#user-interface-ui" id="user-interface-ui">User interface (UI)</a></h1>
+<h1><a class="header" href="#physics" id="physics">Physics</a></h1>
+<h1><a class="header" href="#examples-1" id="examples-1">Examples</a></h1>
+<p>The main focus is on programming as much as possible, as opposed to using a provided game editor, such as Unity.
+Rust and Amethyst will be used for the examples.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/">Rust</a></li>
+<li><a href="https://book.amethyst.rs/stable/">Amethyst</a></li>
+</ul>
+<p>There are other game engines made directly in Rust,
+or that have Rust bindings.</p>
+<h1><a class="header" href="#infrastructure" id="infrastructure">Infrastructure</a></h1>
+<p>This reference guide uses Rust and Amethyst for code examples. This section has some general info about the frameworks.</p>
+<p>Rust is a programming language.</p>
+<p>Amethyst is a &quot;game engine engine&quot;.
+It provides many of the parts required to make a 3D game.
+It uses an Entity-Component-System architecture.</p>
+<h1><a class="header" href="#core-setup-example" id="core-setup-example">Core setup example</a></h1>
+<p>This will set up the minimal things required to run a 3d game with Amethyst and Rust.</p>
+<ul>
+<li>Creating a project</li>
+<li>Adding amethyst dependencies</li>
+<li>Rendering a basic 3D world with
+<ul>
+<li>A flat plane</li>
+<li>A couple of 3D shapes on that plane</li>
+<li>A camera with fixed position and angle looking down on the objects</li>
+</ul>
+</li>
+<li>Basic ui with an fps counter</li>
+<li>Generating prefabs</li>
+</ul>
+<p><img src="examples//images/examples/core-setup-hero.png" alt="Core setup example" /></p>
+<p>The full code example can be found in the <code>code-examples/core-setup-example/</code> folder.
+At the end the file structure will look like the following.</p>
+<pre><code>core-setup-example/
+├─ assets/font/sqaure.ttf
+├─ generated/assets/prefabs/ui/ui.ron
+├─ src/
+│  ├─ bin/prefabs.rs
+│  ├─ entities/mod.rs
+│  ├─ helpers/
+│  │  ├─ mod.rs
+│  │  └─ asset_helpers.rs
+│  ├─ prefabs/
+│  │  ├─ ui/
+│  │  │  └─ build_ui_prefabs.rs
+│  │  └─ mod.rs
+│  ├─ states/mod.rs
+│  ├─ systems/
+│  │  ├─ mod.rs
+│  │  └─ fps_counter_ui_system.rs
+│  └─ lib.rs
+│  └─ main.rs
+├─ target/
+├─ Cargo.lock
+└─ Cargo.toml
+</code></pre>
+<h2><a class="header" href="#create-project" id="create-project">Create project</a></h2>
+<p>Create (or modify) the <code>Cargo.toml</code> file and add the <code>Amethyst</code> dependencies.
+You can use Cargo to create the project with the initial files.</p>
+<pre><code class="language-bash">cargo new core-setup-example
+</code></pre>
+<p>Cargo.toml</p>
+<pre><code class="language-toml">[package]
+name = &quot;core-setup-example&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Debuglines&quot;]
+edition = &quot;2018&quot;
+
+[dependencies.amethyst]
+version = &quot;0.13.2&quot;
+default-features = false
+features = [&quot;vulkan&quot;]
+
+[dependencies]
+serde = { version = &quot;1.0&quot;, features = [&quot;derive&quot;] }
+ron = &quot;0.5.1&quot;
+</code></pre>
+<p>We turn <code>default-features</code> off for now to improve compile times.</p>
+<h2><a class="header" href="#main-game-function" id="main-game-function">Main game function</a></h2>
+<p>We set up the game config in the <code>main.rs</code> file. </p>
+<p>We use a few of the included bundles for the core setup. </p>
+<ul>
+<li>TransformBundle</li>
+<li>RenderingBundle, with plugins
+<ul>
+<li>RenderToWindow</li>
+<li>RenderFlat3D</li>
+<li>RenderSkybox</li>
+<li>RenderUi</li>
+</ul>
+</li>
+<li>InputBundle::<StringBindings></li>
+<li>UiBundle::<StringBindings></li>
+<li>FpsCounterBundle</li>
+</ul>
+<p>We also need our own system to update the fps counter on the ui.</p>
+<ul>
+<li>FpsCounterUiSystem</li>
+</ul>
+<h2><a class="header" href="#a-simple-game-state" id="a-simple-game-state">A simple game state</a></h2>
+<p>We only set up a single state for the core setup, 
+and we only need to implement the <code>SimpleState</code>. 
+It does not need anything more complex 
+as there are only a few things we want it to handle. </p>
+<ul>
+<li>Spawn the plane and the objects on it</li>
+<li>Spawn a camera</li>
+<li>Set up the ui</li>
+<li>Handle quitting if the <code>esc</code> button is pressed</li>
+</ul>
+<p>Only the quit action is handled directly in the state,
+while the rest is delegated to separate functions. </p>
+<h2><a class="header" href="#entities--spawners" id="entities--spawners">Entities / spawners</a></h2>
+<p>We have a few spawners and they follow the same general pattern.</p>
+<ol>
+<li>Initialize components</li>
+<li>Create entity with the builder from the world object</li>
+<li>Add the components</li>
+<li>Build the entity</li>
+</ol>
+<p>Pseudo code</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>pub fn spawn_object(world: &amp;mut World) {
+    let a = A::new();
+    let b = B::new();
+    
+    world
+        .create_entity()
+        .with(a)
+        .with(b)
+        .build();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>For the object we wan to spawn we need to add three main components.</p>
+<ul>
+<li>Transform</li>
+<li>Mesh</li>
+<li>Material</li>
+</ul>
+<p>The <code>Transform</code> sets the position and rotation of the entity in the game world.</p>
+<p>The <code>Mesh</code> sets the shape of the entity. 
+We use the built in shape for a plane, cube, sphere and cone. </p>
+<p>The <code>Material</code> sets how the mesh is displayed.
+We use a built in material with a built in texture. </p>
+<p>The <code>Mesh</code>, the <code>Material</code> and the <code>Texture</code> are assets. 
+Amethyst provides loaders that will load assets based on data you send in
+and we use some very simple ones. 
+We also set up a couple of helper functions for our use case, 
+which is located in the <code>asset_helpers.rs</code> file. </p>
+<h2><a class="header" href="#ui-and-fps-counter" id="ui-and-fps-counter">UI and fps counter</a></h2>
+<p>The fps counter works by combining the Amethyst built-in <code>FpsCounterBundle</code>
+and our small <code>FpsCounterUiSystem</code>. 
+Amethyst also provide example for setting this up. 
+The bundle does all of the heavy lifting, 
+while the system only update the visual part through the ui.
+The only ui we have in this example is a simple ui label widget,
+and these widgets are included with Amethyst. </p>
+<p>In this example we create the prefab data in the code, serialize it and save it to disk. 
+The actual prefabs are then loaded with the <code>UiCreator</code>. 
+The gist of this is fairly simple and fit a small function in the <code>prefabs/ui/build_ui_prefbs.rs</code> file.
+The <code>prefabs</code> bin entry is responsible for building the ui files.</p>
+<h2><a class="header" href="#prefabs" id="prefabs">Prefabs</a></h2>
+<p>Prefabs in its simplicity is just text files (or binary)
+in a format that Amethyst can load and handle as assets. </p>
+<p>The spawners, for example, could have been stored instead as prefabs
+and loaded in as assets instead of creating them directly in the code. 
+The benefit to doing this is that the compiler will help us 
+with any errors we make. </p>
+<p>The main benefit with the prefab asset approach is that we can
+make any number of changes to the content of the prefabs without having to 
+recompile the codebase. 
+This can speed up the development when making small changes to tweak the setup.
+The other benefit is that its a lot easier to work with Amethyst ui code
+when using prefabs than spawning it directly from the code. </p>
+<p>However, we do not want to lose the benefit the compiler gives us
+so we set up a function that creates the prefab data in code and serialize that.
+Instead of creating these prefabs every time we start the game
+we add another bin (<code>src/bin/prefabs.rs</code>) that we can run separately. 
+Wen using multiple bins like this we also need to create a <code>lib.rs</code> file
+that gives us access to the other parts of the code we need. </p>
+<p>An example is available below for the <code>lib.rs</code> file. </p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>pub mod prefabs;
+pub mod helpers;
+<span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#other-resources" id="other-resources">Other resources</a></h1>
+<p><a href="https://arewegameyet.com/">Are we a game yet?</a> can be checked for the status and examples of game related project for Rust</p>
+<ul>
+<li><a href="resources/./resources/3d-games.html">3D games resources</a></li>
+<li><a href="resources/./resources/2d-games.html">2D games resources</a></li>
+</ul>
+<h1><a class="header" href="#3d-games" id="3d-games">3D games</a></h1>
+<h2><a class="header" href="#veloren" id="veloren">Veloren</a></h2>
+<p>Veloren is an open-world, open-source multiplayer voxel RPG. The game is in an early stage of development, but is playable.</p>
+<p><img src="https://user-content.gitlab-static.net/f975eb2d308b0306cf8b9769ee39c97227085538/68747470733a2f2f692e726564642e69742f62616c796e6e656634783533312e706e67" alt="" /></p>
+<ul>
+<li><a href="https://veloren.net/">Website</a></li>
+<li><a href="https://book.veloren.net/">Documentation</a></li>
+<li><a href="https://gitlab.com/veloren/veloren">Code repository</a></li>
+</ul>
+<h1><a class="header" href="#2d-games" id="2d-games">2D games</a></h1>
+<h2><a class="header" href="#roguelike-tutoral-in-rust" id="roguelike-tutoral-in-rust">Roguelike tutoral in Rust</a></h2>
+<p>Check out the excellent <a href="https://bfnightly.bracketproductions.com/rustbook/">Roguelike tutoral in Rust</a>.</p>
+<h2><a class="header" href="#ggez-a-game-engine-in-rust" id="ggez-a-game-engine-in-rust">ggez, a game engine in rust</a></h2>
+<p>Rust library to create a Good Game Easily.
+More specifically, ggez is a lightweight game framework for making 2D games with minimum friction.
+It aims to implement an API based on (a Rustified version of) the LÖVE game framework.
+Thus it contains portable 2D drawing, sound, resource loading and event handling.
+ggez is not meant to be everything to everyone,
+but rather a good base upon which to build higher-level systems and a useful tool that lets you immediately get started on projects such as game jams.</p>
+<ul>
+<li><a href="http://ggez.rs">Website</a></li>
+<li><a href="https://github.com/ggez/ggez">Code repository</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
