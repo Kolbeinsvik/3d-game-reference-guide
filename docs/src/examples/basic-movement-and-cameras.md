@@ -1,23 +1,38 @@
-# Core setup example
+# Basic movement and cameras
 
-This will set up the minimal things required to run a 3d game with Amethyst and Rust.
+This example extends the [core example](core-setup.md) with basic movement 
+and ways to set up and move different types of cameras. 
+The [camera section](/cameras/) outlines the different camera concepts. 
 
-- Creating a project
-- Adding amethyst dependencies
-- Rendering a basic 3D world with
-  - A flat plane
-  - A couple of 3D shapes on that plane
-  - A camera with fixed position and angle looking down on the objects
-- Basic ui with an fps counter
-- Generating prefabs
+The movement types will directly manipulate the `Transform` 
+(TODO: link to transformation matrix) component of entities.
+It is not physics-based in any way, though that will be covered in a later example. 
+
+Types of movement covered
+
+- 3 degrees of translational movement
+- 6 degrees of "free-float" movement
+
+Types of cameras covered
+
+- First-person camera angle
+- Third-person camera angle
+- Top-down camera angle
+- Side-scrolling camera angle
+- Isometric camera angle
+
+Other features
+
+- Switch between the different types of movements and cameras
+- Ui to show the active movement and camera
 
 ![Core setup example](/images/examples/core-setup-hero.png)
 
-The full code example can be found in the `code-examples/core-setup-example/` folder.
+The full code example can be found in the `code-examples/basic-movement-and-cameras-example/` folder.
 At the end the file structure will look like the following.
 
 ```
-core-setup-example/
+basic-movement-and-cameras-example/
 ├─ assets/font/sqaure.ttf
 ├─ generated/assets/prefabs/ui/ui.ron
 ├─ src/
@@ -40,8 +55,6 @@ core-setup-example/
 ├─ Cargo.lock
 └─ Cargo.toml
 ```
-
-The `sqaure.ttf` font can be fetched from the Amethyst project. 
 
 ## Create project
 

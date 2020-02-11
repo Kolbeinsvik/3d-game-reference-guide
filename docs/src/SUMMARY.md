@@ -10,6 +10,7 @@
   - [Game Engines](./infrastructure/game-engines.md)
   - [Entity-Component-System (ECS)](./infrastructure/entity-component-system.md)
   - [Graphics API](./infrastructure/graphics-api.md)
+- [Cameras](./cameras/index.md)
 - [Window management](./window-management/index.md)
   - [Examples](./window-management/examples.md)
 - [User interface (UI)](./user-interface/index.md)

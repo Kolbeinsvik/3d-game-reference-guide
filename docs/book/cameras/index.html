@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Physics - 3D game reference guide with Rust and Amethyst</title>
+        <title>Cameras - 3D game reference guide with Rust and Amethyst</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded affix "><a href="../introduction.html">Introduction</a></li><li class="spacer"></li><li class="expanded "><a href="../overview/index.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="../infrastructure/index.html"><strong aria-hidden="true">2.</strong> Infrastructure</a></li><li><ol class="section"><li class="expanded "><a href="../infrastructure/programming-languages.html"><strong aria-hidden="true">2.1.</strong> Programming languages</a></li><li class="expanded "><a href="../infrastructure/game-engines.html"><strong aria-hidden="true">2.2.</strong> Game Engines</a></li><li class="expanded "><a href="../infrastructure/entity-component-system.html"><strong aria-hidden="true">2.3.</strong> Entity-Component-System (ECS)</a></li><li class="expanded "><a href="../infrastructure/graphics-api.html"><strong aria-hidden="true">2.4.</strong> Graphics API</a></li></ol></li><li class="expanded "><a href="../cameras/index.html"><strong aria-hidden="true">3.</strong> Cameras</a></li><li class="expanded "><a href="../window-management/index.html"><strong aria-hidden="true">4.</strong> Window management</a></li><li><ol class="section"><li class="expanded "><a href="../window-management/examples.html"><strong aria-hidden="true">4.1.</strong> Examples</a></li></ol></li><li class="expanded "><a href="../user-interface/index.html"><strong aria-hidden="true">5.</strong> User interface (UI)</a></li><li class="expanded "><a href="../physics/index.html" class="active"><strong aria-hidden="true">6.</strong> Physics</a></li><li class="spacer"></li><li class="expanded "><a href="../examples/index.html"><strong aria-hidden="true">7.</strong> Practical examples</a></li><li><ol class="section"><li class="expanded "><a href="../examples/core-setup.html"><strong aria-hidden="true">7.1.</strong> Core setup</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../resources/index.html"><strong aria-hidden="true">8.</strong> Other Resources</a></li><li><ol class="section"><li class="expanded "><a href="../resources/3d-games-resources.html"><strong aria-hidden="true">8.1.</strong> 3D games</a></li><li class="expanded "><a href="../resources/2d-games-resources.html"><strong aria-hidden="true">8.2.</strong> 2D games</a></li><li class="spacer"></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded affix "><a href="../introduction.html">Introduction</a></li><li class="spacer"></li><li class="expanded "><a href="../overview/index.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="expanded "><a href="../infrastructure/index.html"><strong aria-hidden="true">2.</strong> Infrastructure</a></li><li><ol class="section"><li class="expanded "><a href="../infrastructure/programming-languages.html"><strong aria-hidden="true">2.1.</strong> Programming languages</a></li><li class="expanded "><a href="../infrastructure/game-engines.html"><strong aria-hidden="true">2.2.</strong> Game Engines</a></li><li class="expanded "><a href="../infrastructure/entity-component-system.html"><strong aria-hidden="true">2.3.</strong> Entity-Component-System (ECS)</a></li><li class="expanded "><a href="../infrastructure/graphics-api.html"><strong aria-hidden="true">2.4.</strong> Graphics API</a></li></ol></li><li class="expanded "><a href="../cameras/index.html" class="active"><strong aria-hidden="true">3.</strong> Cameras</a></li><li class="expanded "><a href="../window-management/index.html"><strong aria-hidden="true">4.</strong> Window management</a></li><li><ol class="section"><li class="expanded "><a href="../window-management/examples.html"><strong aria-hidden="true">4.1.</strong> Examples</a></li></ol></li><li class="expanded "><a href="../user-interface/index.html"><strong aria-hidden="true">5.</strong> User interface (UI)</a></li><li class="expanded "><a href="../physics/index.html"><strong aria-hidden="true">6.</strong> Physics</a></li><li class="spacer"></li><li class="expanded "><a href="../examples/index.html"><strong aria-hidden="true">7.</strong> Practical examples</a></li><li><ol class="section"><li class="expanded "><a href="../examples/core-setup.html"><strong aria-hidden="true">7.1.</strong> Core setup</a></li><li class="spacer"></li></ol></li><li class="expanded "><a href="../resources/index.html"><strong aria-hidden="true">8.</strong> Other Resources</a></li><li><ol class="section"><li class="expanded "><a href="../resources/3d-games-resources.html"><strong aria-hidden="true">8.1.</strong> 3D games</a></li><li class="expanded "><a href="../resources/2d-games-resources.html"><strong aria-hidden="true">8.2.</strong> 2D games</a></li><li class="spacer"></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -148,20 +148,76 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#physics" id="physics">Physics</a></h1>
+                        <h1><a class="header" href="#different-camera-types-for-3d-games" id="different-camera-types-for-3d-games">Different camera types for 3D games</a></h1>
+<p>There are different camera types used in 3D (or 2.5D) games. </p>
+<p>Camera grouping</p>
+<ul>
+<li>Locked camera angle</li>
+<li>Free moving camera angles</li>
+</ul>
+<p>Named camera angles</p>
+<ul>
+<li>First-person camera angle</li>
+<li>Third-person camera angle</li>
+<li>Top-down camera angle</li>
+<li>Side-scrolling camera angle</li>
+<li>Isometric camera angle</li>
+</ul>
+<p>How each do rotation, movement, move the entity they are attached to, 
+rotation of the entity they are attached to. </p>
+<h2><a class="header" href="#first-person-camera" id="first-person-camera">First-person camera</a></h2>
+<p>The first-person camera is placed at the &quot;head&quot; position of the entity they are attached to. 
+For people or creature objects this is easy to imagine.
+Rotation and tilting are changed based on input, 
+most often from the computer mouse or the right analogue stick on a gamepad,
+and that updates the &quot;head&quot; entity. 
+The camera angle is anchored and fixed to that entity and so will follow it, 
+making it seem like the camera rotated or tilted. 
+The tilt angle is often clamped so that the camera cannot be tilted to the top and behind itself. 
+However, the rotation are most often not clamped, so that players can rotate back and forth without issues. </p>
+<p><strong>Vehicle first-person camera</strong></p>
+<p>There is a subset of first-person cameras that are used for &quot;vehicle&quot; entities.
+For example a camera inside the driver side of a car, the cockpit of an aircraft, or a gun turret. 
+They act like regular first-person cameras that has their rotation clamped as well as their tilt. 
+Though, they often have a separate key trigger that will allow the player to watch behind them.</p>
+<p><strong>Hand-held items</strong></p>
+<p>A big part of the first-person camera is that items are often shown permanently in the camera view. 
+The most prominent example is probably weapons, which is a mainstay of the  &quot;first-person shooter&quot; genre.
+However, it can apply to any item, and can have different properties. 
+A lantern or torch, for example can be held in view and light up the environment around the player.
+Many games also have an eating mechanic where the normal item in view is dropped out of it and 
+a food item is brought up and &quot;eaten&quot; before the main item is brought back up in view. </p>
+<p><strong>Models in view</strong></p>
+<p>Full body realism is not required when using first-person cameras. 
+This means that many games only render part of the 3D models in the first-person view.
+Often only the arms and potential item is rendered, with the occasional other feature,
+such as a foot used as a melee mechanic.
+This means that players can look directly down and not see the feet of their character. </p>
+<p>Some games also use a &quot;bobbing&quot; mechanic to make the movement feel more &quot;natural&quot;, 
+though some players experience motion sickness from it and so its often a feature that can be turned off. 
+Another mechanic is to make an item in view follow tilt and rotations with a slight lag and then snap,
+to make it feel less static. 
+It can also improve the &quot;identity&quot; of characters as making this animation looser may
+convey a more sloppy, while a more snappy animation may convey more control or skill.</p>
+<h2><a class="header" href="#third-person-camera" id="third-person-camera">Third-person camera</a></h2>
+<h2><a class="header" href="#relevant-wikipedia-pages-about-game-cameras" id="relevant-wikipedia-pages-about-game-cameras">Relevant Wikipedia pages about game cameras</a></h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Virtual_camera_system</li>
+<li>https://en.wikipedia.org/wiki/First-person_(video_games)</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../user-interface/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../infrastructure/graphics-api.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../examples/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../window-management/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -173,13 +229,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../user-interface/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../infrastructure/graphics-api.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../examples/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../window-management/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

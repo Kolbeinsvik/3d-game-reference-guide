@@ -18,3 +18,4 @@ or that have Rust bindings.
 ## Table of content
 
 - [Core setup](core-setup.md) example
+- [Basic movement and cameras](basic-movement-and-cameras.md) example
