@@ -2,6 +2,7 @@ pub mod ui;
 
 pub enum PrefabFilename {
     UiFpsCounter,
+    UiContext,
 }
 
 impl<'a> PrefabFilename {
@@ -13,5 +14,6 @@ impl<'a> PrefabFilename {
 pub fn prefab_filename<'a>(prefab_filename: PrefabFilename) -> &'a str {
     return match prefab_filename {
         PrefabFilename::UiFpsCounter => "fps.ron",
+        PrefabFilename::UiContext => "context.ron",
     };
 }

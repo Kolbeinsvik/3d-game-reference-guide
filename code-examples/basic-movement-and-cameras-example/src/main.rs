@@ -26,6 +26,7 @@ use crate::systems::fps_counter_ui_system::FpsCounterUiSystem;
 mod entities;
 mod helpers;
 mod prefabs;
+mod resources;
 mod states;
 mod systems;
 
@@ -37,12 +38,8 @@ struct Opts {
 }
 
 fn main() -> amethyst::Result<()> {
-    let generated_prefabs = handle_prefab_generation();
-    if generated_prefabs == false {
-        return start_game();
-    }
-
-    return Ok(());
+    handle_prefab_generation();
+    return start_game();
 }
 
 fn start_game() -> amethyst::Result<()> {
@@ -86,15 +83,12 @@ fn start_game() -> amethyst::Result<()> {
     Ok(())
 }
 
-fn handle_prefab_generation() -> bool {
-    let mut has_run_a_generate_prefab = false;
-
+fn handle_prefab_generation() {
     let opts: Opts = Opts::parse();
     if opts.prefabs_ui {
         println!("Generating ui prefabs");
         generate_ui_prefabs();
-        has_run_a_generate_prefab = true;
     }
 
-    return has_run_a_generate_prefab;
+    return ();
 }

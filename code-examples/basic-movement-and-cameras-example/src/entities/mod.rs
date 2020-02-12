@@ -8,28 +8,7 @@ use amethyst::renderer::palette::LinSrgba;
 use amethyst::renderer::shape::Shape;
 use amethyst::window::ScreenDimensions;
 
-pub fn spawn_camera(world: &mut World) -> Entity {
-    let transform = {
-        let mut transform = Transform::default();
-        transform.prepend_translation_y(10.0);
-        transform.prepend_translation_z(10.0);
-        transform.prepend_translation_x(10.0);
-        transform.append_rotation_x_axis(-45.0f32.to_radians());
-        transform.prepend_rotation_y_axis(45.0f32.to_radians());
-        transform
-    };
-
-    let (width, height) = {
-        let dim = world.read_resource::<ScreenDimensions>();
-        (dim.width(), dim.height())
-    };
-
-    return world
-        .create_entity()
-        .with(Camera::standard_3d(width, height))
-        .with(transform)
-        .build();
-}
+pub mod camera;
 
 pub fn spawn_plane(world: &mut World) {
     let mesh = load_shape_mesh(world, Shape::Plane(None));

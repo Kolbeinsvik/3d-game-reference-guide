@@ -1,10 +1,13 @@
-use crate::entities::{spawn_camera, spawn_cone, spawn_cube, spawn_plane, spawn_sphere};
-use crate::prefabs::ui::set_up_ui;
 use amethyst::input::is_key_down;
 use amethyst::input::VirtualKeyCode;
 use amethyst::prelude::*;
 use amethyst::renderer::camera::ActiveCamera;
 use amethyst::{GameData, SimpleState, StateData};
+
+use crate::entities::camera::spawn_camera_first_person;
+use crate::entities::{spawn_cone, spawn_cube, spawn_plane, spawn_sphere};
+use crate::prefabs::ui::set_up_ui;
+use crate::resources::movement::insert_active_movement_resource;
 
 pub struct SetupState {}
 
@@ -16,17 +19,22 @@ impl Default for SetupState {
 
 impl SimpleState for SetupState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
-        spawn_plane(data.world);
-        spawn_cube(data.world);
-        spawn_sphere(data.world);
-        spawn_cone(data.world);
+        let StateData { world, .. } = data;
 
-        let camera = spawn_camera(data.world);
-        data.world.insert(ActiveCamera {
-            entity: Some(camera),
+        spawn_plane(world);
+        spawn_cube(world);
+        spawn_sphere(world);
+        spawn_cone(world);
+
+        let camera_first_person = spawn_camera_first_person(world);
+
+        world.insert(ActiveCamera {
+            entity: Some(camera_first_person),
         });
 
-        set_up_ui(data.world);
+        insert_active_movement_resource(world);
+
+        set_up_ui(world);
 
         return ();
     }
