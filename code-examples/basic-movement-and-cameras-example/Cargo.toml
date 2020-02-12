@@ -1,0 +1,15 @@
+[package]
+name = "basic-movement-and-cameras-example"
+version = "0.1.0"
+authors = ["Debuglines"]
+edition = "2018"
+
+[dependencies.amethyst]
+version = "0.13.2"
+default-features = false
+features = ["vulkan"]
+
+[dependencies]
+clap = { git = "https://github.com/clap-rs/clap/" }
+serde = { version = "1.0", features = ["derive"] }
+ron = "0.5.1"
